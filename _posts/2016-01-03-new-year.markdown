@@ -1,0 +1,49 @@
+---
+layout: post
+title:  "15年小结"
+date:   2016-01-02 18:24:00
+categories:
+---
+
+> *如果再不写年终总结的话，估计以后都不会写了，习惯养成很艰难，丢掉太容易了*
+
+犹记得15年跨年的时候我熬夜打完了《The Last of Us》，手心带汗，脑海中的震撼压过了疲惫感，默想着要努力做出好游戏，好的剧情，好的场景人物表现，好到自己可以被感动。1年过去了，这个目标依然遥不可及，表现上无论是画面，物理还是动画，我们都可以做到国外单机水准，只是玩法，剧情，大概是于正到大卫芬奇的差距。不出所料，15年重点基本上都是在工作上了，现在的工作节奏比前两年好了不少，通常会忙一阵子，然后轻松一段时间，也有了不少时间进行充电和反思。单纯从工作任务上来讲，完成了几个大的系统：
+
+* Clothing：布料的物理模拟集成
+* Destruction：破坏系统，支持大规模的场景破坏
+* Mechanic：战斗中的各种器械：火炮，投石机，攻城车等等
+* Damage detection：伤害检测，技能命中
+* 其他：旗帜，死亡Ragdoll效果优化，燃烧等.
+
+很少写系统方面的总结，一方面是自己太懒了，另一方面是和游戏Gamplay关联比较大，记录的价值并不是太大。今年要开测，工作仍然会是重点，只是希望可以多做些底层相关的东西，gameplay已经写吐了。
+
+其他的技能树方面C++11算是入门水平，haskell只能算简单了解。我不擅长只通过读书就可以理解知识，但平时工作并不会用到C++0x，haskell更不会了，所以只能通过自己造轮子来加深理解了。希望今年可以实现以下github项目：
+
++ C++ Reflection: 
+	- base on code generator such as Qt;
+	- base on clang;
+	- geneerally methods in game engine base on meta-template programming;
++ Monster Engine: 个人的游戏引擎小玩具，实现了bgfx render的绑定，可以用来做一些小的demo，希望可以加入
+	- schema system;
+	- serialization base on c++ reflection;
+	- lua binding
++ Haskell:
+	- haskell binding monster engine;
+	- implement at least one [project](http://www.scs.stanford.edu/11au-cs240h/labs/project.html);
+
+技能树希望可以加入一下分支：
+
+* Rust：很多游戏界国外大牛都很推崇，看看它是如何处理C++各种不爽的地方；
+* Server Programming: 目标就是在vps上实现一个快速高效的代理；
+
+15年没读什么书，特别是技术方面，《Real World Haskell》和《Effective Morden C++》都没有读完，其他的更多的只是技术参考书，粗读一下，用到再翻。反而GDC的Paper读了倒是不少，有的还仔细做了笔记。
+其他方面有印象的大部分都是些科幻类的：
+
++ [永恒的终结](http://book.douban.com/subject/25829693/)：基本上每一本阿西莫夫的书都令人惊叹，整个世界观的构建庞大而完整，剧情转接也很流畅，无比希望诺兰拍成电影；
++ [献给阿尔吉侬的花束](http://read.douban.com/ebook/8592390/)：一些早期科幻小说合集，最好的一篇即是书名，很难评价这是不是一部真正的科幻小说，但确实是一个很好的故事，一个很值得回味的故事；
++ [你一生的故事](http://book.douban.com/subject/26295448/)：Ted Chiang小说合集，相对于其他科幻小说里多是物理天文学，太空旅行，他更偏爱于语言逻辑学以及朴素的日常生活，读起来相当流畅，阅读体验很棒，特别是《你一生的故事》和《巴比伦塔》；
++ [漫长的告别](http://book.douban.com/subject/3013903/)：每次告别都是死去一点点，一点点，一点点。。。, 我已阵亡。。。
+
+年度电影是14年的这部[百元之恋](http://movie.douban.com/subject/25761178/)，比起各种饕餮大餐，还是更喜欢这种恶意满满的小吃（片尾曲超赞），此外14年的[真探](http://movie.douban.com/subject/10748120/)也非常喜欢。大概是老了，没有追任何新番，只是补完了浦泽直树的[Monster](http://movie.douban.com/subject/1427980/)。
+
+一整年都木有怎么出去玩，也木有怎么拍照，希望16年可以弥补吧！

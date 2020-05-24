@@ -1,0 +1,50 @@
+---
+layout: post
+title:  "升级 Visual Studio 2015"
+date:   2015-12-28 23:24:00
+categories: compile, vs2015
+---
+
+之前引擎一直是VC11（Visual Studio 2012)版本，VS2012本身有许多问题，比如内存占用率高，多线程编译性能不佳等，相比之下VS2015就改善了许多，并且增加了许多新的特性，比如内置的debug perfornce，static C/C++ code analysis，特别是update 1的clang front-end，升级是必须的。
+
+引擎本身的工程升级比较简单，困难的在于各种第三方库的vc14版本的升级，基本上每个第三方库都会碰到些坑.
+
+[FreeImage](http://skylineservers.dl.sourceforge.net/project/freeimage/Source%20Distribution/3.17.0/FreeImage3170.zip)的source code里面有原始的vs2013工程，但直接升级2015后出现编译error：
+{% highlight cpp %}
+fatal error C1189: #error: Macro definition of snprintf conflicts with Standard 
+Library function declaration.
+{% endhighlight %}
+原因是vs2015里面定义了宏snprintf，就不需要重新定义，解决方案是在原来定义snprintf宏的地方加入MSVC版本的检查
+{% highlight cpp %}
+#if (defined(_MSC_VER) && (_MSC_VER < 1900)) 
+#define snprintf _snprintf 
+#endif
+{% endhighlight %}
+
+[curl](https://github.com/bagder/curl.git)的x86版本只需要按照winbuild文件夹下的指示即可编译成功，但x64版本需要一些额外设置，在VS2015的Developer Command Promat下要首先运行Microsoft Visual Studio 14.0\VC\bin\x86_amd64\里面的vcvarsx86_amd64.bat，再输入相应的nmake命令，不然会产生
+{% highlight cpp %}
+fatal error LNK1112: module machine type 'X86' conflicts with target machine 
+type 'x64'.
+{% endhighlight %}
+
+[eNet](https://github.com/lsalzman/enet) source code中有CMakeLists.txt，只需要用CMake创建相应的VS2015版本的工程即可编译。
+
+[freetype2]把builds/windows/vc2010下的工程升级为vs2015版本的编译即可。
+
+[libevent](https://github.com/lsalzman/enet) source code中也有CMake文件，但直接创建后编译不过，原因是ssize_t在windows下是没有定义的，应该是CMake生成工程时没有包含正确的event-config.h，需要手动把WIN32-Code/nmake/event2/event-config.h中的内容copy到工程中的event-config.h文件。
+
+[pthread2](http://sourceforge.net/projects/pthreads4w/files/latest/download) source code中有nmake的Makefile，直接运行
+```
+nmake clean VC-static
+```
+会出现以下编译error
+{% highlight cpp %}
+error C2011: 'timespec': 'struct' type redefinition
+{% endhighlight %}
+解决方案是在pthread.h的320 Line前面加入
+{% highlight cpp %}
+#if defined (_MSC_VER) && (_MSC_VER >= 1900)
+#define HAVE_STRUCT_TIMESPEC
+#endif
+{% endhighlight %}
+另外编译x64版本也需要和curl一样，首先运行amd64版本的vcvarsx86_amd64.bat。
